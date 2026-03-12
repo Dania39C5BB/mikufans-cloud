@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: mikufans-cloud-web
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+  config:
+    import:
+      - optional:nacos:${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+      - optional:nacos:seata-common-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+  # 邮件配置
+  mail:
+    host: smtp.qq.com  # 邮箱SMTP服务器地址
+    port: 25          # 端口号
+    username: 2079253084@qq.com # 收件人邮箱账号
+    password: chttxtmymjycdgbg      # 授权码或密码
+    default-encoding: UTF-8
+    properties.mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+    properties.mail.debug: true
